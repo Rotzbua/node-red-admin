@@ -25,7 +25,7 @@ var config = require("../../lib/config");
 describe("lib/request", function() {
     "use strict";
     before(function() {
-        sinon.stub(config,"target").returns("http://example.com/target");
+        sinon.stub(config,"target").returns("https://example.com/target");
         sinon.stub(config,"tokens").returns(null);
     });
     after(function() {
@@ -38,7 +38,7 @@ describe("lib/request", function() {
 
         api.request("/foo",{}).then(function(res) {
             try {
-                request.get.args[0][0].should.eql("http://example.com/target/foo");
+                request.get.args[0][0].should.eql("https://example.com/target/foo");
                 request.get.args[0][1].headers.should.not.have.a.property("Authorization");
                 done();
             } catch(err) {

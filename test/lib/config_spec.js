@@ -28,9 +28,9 @@ describe("lib/config", function() {
     });
     it('loads preferences when target referenced', sinon.test(function() {
         this.stub(fs,"readFileSync").callsFake(function() {
-            return '{"target":"http://example.com:1880"}';
+            return '{"target":"https://example.com:1880"}';
         });
-        config.target().should.eql("http://example.com:1880");
+        config.target().should.eql("https://example.com:1880");
     }));
     it('provide default value for target', sinon.test(function() {
         this.stub(fs,"readFileSync").callsFake(function() {
@@ -41,13 +41,13 @@ describe("lib/config", function() {
 
     it('saves preferences when target set', sinon.test(function() {
         this.stub(fs,"readFileSync").callsFake(function() {
-            return '{"target":"http://another.example.com:1880"}';
+            return '{"target":"https://another.example.com:1880"}';
         });
         this.stub(fs,"writeFileSync").callsFake(function() {});
 
-        config.target().should.eql("http://another.example.com:1880");
-        config.target("http://final.example.com:1880");
-        config.target().should.eql("http://final.example.com:1880");
+        config.target().should.eql("https://another.example.com:1880");
+        config.target("https://final.example.com:1880");
+        config.target().should.eql("https://final.example.com:1880");
 
         fs.readFileSync.calledOnce.should.be.true;
         fs.writeFileSync.calledOnce.should.be.true;
