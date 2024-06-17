@@ -26,7 +26,7 @@ var result = require("./result_helper");
 describe("commands/target", function() {
     var target;
     beforeEach(function() {
-        target = "http://test.example.com";
+        target = "https://test.example.com";
         sinon.stub(config,"target").callsFake(function(arg) {
             if (arg) { target = arg } else { return target;}
         });
@@ -47,9 +47,9 @@ describe("commands/target", function() {
     });
 
     it('sets the target', function(done) {
-        command({_:[null,"http://newtarget.example.com"]},result).then(() => {
+        command({_:[null,"https://newtarget.example.com"]},result).then(() => {
             config.target.called.should.be.true();
-            config.target.args[0][0].should.eql("http://newtarget.example.com");
+            config.target.args[0][0].should.eql("https://newtarget.example.com");
             result.log.called.should.be.true();
             /http\:\/\/newtarget\.example\.com/.test(result.log.args[0][0]).should.be.true();
             done();
@@ -65,9 +65,9 @@ describe("commands/target", function() {
         }).catch(done);
     });
     it('strips trailing slash from target', function(done) {
-        command({_:[null,"http://newtarget.example.com/"]},result).then(() => {
+        command({_:[null,"https://newtarget.example.com/"]},result).then(() => {
             config.target.called.should.be.true();
-            config.target.args[0][0].should.eql("http://newtarget.example.com");
+            config.target.args[0][0].should.eql("https://newtarget.example.com");
             done();
         }).catch(done);
     });
